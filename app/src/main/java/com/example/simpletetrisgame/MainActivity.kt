@@ -5,13 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.simpletetrisgame.storage.AppPreferences
 import com.google.android.material.snackbar.Snackbar
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,8 +29,6 @@ class MainActivity : AppCompatActivity() {
         btnResetGame.setOnClickListener(this::onBtnResetGame)
 
         btnExit.setOnClickListener(this::handleExitEvent)
-
-
     }
 
     fun onBtnNewGame(view: View) {

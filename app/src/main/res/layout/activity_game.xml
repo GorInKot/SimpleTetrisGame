@@ -70,11 +70,19 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#000"/>
+            android:background="#000"
+            />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="9"/>
+            android:layout_weight="9"
+            >
+            <com.example.simpletetrisgame.TetrisView
+                android:id="@+id/view_tetris"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
