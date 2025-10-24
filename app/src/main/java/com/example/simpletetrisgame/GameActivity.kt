@@ -80,6 +80,6 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun updateCurrentScore() {
-        tvCurrentScore?.text = "0"
+        tvCurrentScore?.text = "${appModel.score}"
     }
 }

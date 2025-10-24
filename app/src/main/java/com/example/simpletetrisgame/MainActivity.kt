@@ -44,6 +44,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun handleExitEvent(view: View) {
-        System.exit(0)
+        finish()
     }
 }

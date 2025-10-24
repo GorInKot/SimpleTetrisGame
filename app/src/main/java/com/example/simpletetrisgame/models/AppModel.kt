@@ -1,6 +1,7 @@
 package com.example.simpletetrisgame.models
 
-import android.graphics.Point
+import android.util.Log
+import com.example.simpletetrisgame.models.Point
 import com.example.simpletetrisgame.constants.CellConstants
 import com.example.simpletetrisgame.constants.FieldConstrants
 import com.example.simpletetrisgame.helper.array2dOfByte
@@ -95,21 +96,21 @@ class AppModel {
     }
 
     fun generateField(action: String) {
-        println("AppModel: Generating field with action: $action, currentBlock: $currentBlock, position: ${currentBlock?.position}, frameNumber: ${currentBlock?.frameNumber}, frameCount: ${currentBlock?.frameCount}")
+        Log.d("TAGG","AppModel: Generating field with action: $action, currentBlock: $currentBlock, position: ${currentBlock?.position}, frameNumber: ${currentBlock?.frameNumber}, frameCount: ${currentBlock?.getFrameCount()}")
         if (isGameActive()) {
             resetField()
             val frameNumber: Int? = currentBlock?.frameNumber
-            val frameCount: Int? = currentBlock?.frameCount
+            val frameCount: Int? = currentBlock?.getFrameCount() ?: 1
             if (frameNumber == null || frameCount == null) {
-                println("AppModel: Invalid frameNumber or frameCount, aborting")
+                Log.d("TAGG","AppModel: Invalid frameNumber or frameCount, aborting")
                 return
             }
-            if (frameNumber < 0 || frameNumber >= frameCount) {
-                println("AppModel: Invalid frameNumber $frameNumber for frameCount $frameCount, resetting to 0")
-                currentBlock?.setState(0, currentBlock?.position ?: return)
-                translateBlock(currentBlock?.position ?: return, 0)
-                return
-            }
+//            if (frameNumber < 0 || frameNumber >= frameCount) {
+//                Log.d("TAGG","AppModel: Invalid frameNumber $frameNumber for frameCount $frameCount, resetting to 0")
+//                currentBlock?.setState(0, currentBlock?.position ?: return)
+//                translateBlock(currentBlock?.position ?: return, 0)
+//                return
+//            }
             val coordinate: Point = currentBlock?.position?.let { Point(it.x, it.y) } ?: return
 
             when (action) {
@@ -127,7 +128,7 @@ class AppModel {
                     if (newFrameNumber >= frameCount) {
                         newFrameNumber = 0
                     }
-                    println("AppModel: Rotating block, frameNumber: $frameNumber, newFrameNumber: $newFrameNumber, frameCount: $frameCount")
+                    Log.d("TAGG","AppModel: Rotating block, frameNumber: $frameNumber, newFrameNumber: $newFrameNumber, frameCount: $frameCount")
                     if (!moveValid(coordinate, newFrameNumber)) {
                         translateBlock(currentBlock?.position ?: return, frameNumber)
                         return
@@ -170,7 +171,7 @@ class AppModel {
             for (j in 0 until field[i].size) {
                 var status = getCellStatus(i, j)
                 if (status == CellConstants.EPHEMERAL.value) {
-                    status = currentBlock?.staticValue
+                    status = currentBlock?.getStaticValue()
                     setCellStatus(i, j, status)
                 }
             }

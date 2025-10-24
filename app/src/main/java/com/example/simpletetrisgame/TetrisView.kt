@@ -104,11 +104,11 @@ class TetrisView: View {
         val cellStatus = model?.getCellStatus(row, col)
         if (cellStatus != CellConstants.EMPTY.value) {
             val color = if (cellStatus == CellConstants.EPHEMERAL.value) {
-                model?.currentBlock?.color
+                model?.currentBlock?.getColor() ?: Color.BLACK
             } else {
                 Block.getColor(cellStatus ?: CellConstants.EMPTY.value)
             }
-            color?.let { drawCell(canvas, col, row, it) }
+            drawCell(canvas, col, row, color)
         }
     }
 
